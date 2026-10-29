@@ -1,3 +1,11 @@
+import src.Arma;
+import src.Artefato;
+import src.Inimigo;
+import src.ItemInterface;
+import src.Mochila;
+import src.Pocao;
+import src.Usuario;
+
 public class Main{
 
     protected final Usuario usuario;

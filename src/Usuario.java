@@ -90,7 +90,7 @@ public class Usuario{
         return this.moedas;
     }
 
-    public void addMoedas(int moedas){
-        this.moedas = moedas;
+    public void useMoedas(int moedas){
+        this.moedas --;
     }
 }

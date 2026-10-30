@@ -9,8 +9,7 @@ public class Mochila{
     protected ArrayList<Artefato> artefatos;
     protected ArrayList<Pocao> pocoes;
     protected HashMap<Arma,Artefato> associados;
-
-    protected int espaco = 0;
+    protected int espacoUsado = 0;
 
     public Mochila(){
         this.armas = new ArrayList<>();
@@ -35,8 +34,8 @@ public class Mochila{
         return this.pocoes;
     }
 
-    public int consultarEspaco(){
-        return this.espaco;
+    public int consultarEspacoUsado(){
+        return this.espacoUsado;
     }
     
     public int getPosItem(Arma arma, Artefato artefato, Pocao pocao){
@@ -55,12 +54,14 @@ public class Mochila{
 
     public void addItem(Arma arma, Artefato artefato, Pocao pocao){
         if(arma != null){
+            this.espacoUsado += arma.getCategoria().contains("magico") ? 1 : 2;
             armas.add(arma);
         }
         if(artefato != null){
             artefatos.add(artefato);
         }
         if(pocao != null){
+            this.espacoUsado ++;
             pocoes.add(pocao);
         }
 

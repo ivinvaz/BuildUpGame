@@ -110,4 +110,7 @@ public class Mochila{
         associados.put(arma,artefato);
     }
 
+    public Artefato findByIndexArtefato(int index){
+        return this.artefatos[index];
+    }
 }

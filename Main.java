@@ -16,6 +16,8 @@ public class Main{
         int escolha;
         int inEscolha;
         int inInEscolha;
+        int etapa = 1;
+        boolean resultadoVenceu = true;
 
         Scanner scanner = new Scanner(System.in);
         System.out.print("Digite seu nome: ");
@@ -91,9 +93,9 @@ public class Main{
                                                 inInEscolha = scanner.nextInt();
                                                 if(criarIntervalo(1,mochila.consultarArtefatos().size()).contains(inInEscolha)){
 
-                                                    //ADICIONAR LÓGICA DE SELEÇÃO AQUI
+                                                    Artefato ArtefatoEscolhido = mochila.findByIndexArtefato(inInEscolha);
 
-                                                    mochila.removerItem(null,null,null);
+                                                    mochila.removerItem(null,ArtefatoEscolhido,null);
                                                     break;
                                                 }else{
                                                     System.out.print("Escolha um número válido");
@@ -135,6 +137,119 @@ public class Main{
                             continue;
 
                         case 4:
+
+                            Inimigo inimigo1 = new Inimigo(etapa);
+
+                            while(true){
+                                System.out.println("\nVocê está prestes a enfrentar o inimigo " + inimigo.getNome() + " que possui " + inimigo.getDano() + "de dano, e categoria " + inimigo.getCategoria());
+                                System.out.println("\n Você deseja continuar: \n 1. Sim \n 2. Não");
+                                inEscolha = scanner.nextInt();
+                                if(criarIntervalo(1,2).contains(inEscolha)){
+
+                                    if(inEscolha == 2){
+                                        break;
+                                    }else{
+                                        HashMap<String, Object> resultado = usuario.batalhar(inimigo1);
+                                        string resultadoVida = resultado.get("vida");
+                                        resultadoVenceu = resultado.get("venceu");
+                                        string resultadoMensagem = resultado.get("mensagem");
+
+                                        if(!resultadoVenceu){
+                                            System.out.println(resultadoMensagem);
+                                            break;
+                                        }else{
+                                            etapa ++;
+                                            while(true){
+                                                renderizarMenuEtapa(usuario.getVida(), mochila.consultarEspacoUsado(), usuario.getMoedas());
+                                                inInEscolha = scanner.nextInt();
+                                                if(criarIntervalo(1,6).contains(inInEscolha)){
+                                                    switch(inInEscolha){
+                                                        case 1:
+                                                            while(true){
+                                                                renderizarMenuMochila();
+                                                                inEscolha = scanner.nextInt();
+                                                                if(criarIntervalo(1,3).contains(inEscolha)){
+                                                                    switch(inEscolha){
+                                                                        case 1:
+                                                                            while(true){
+                                                                                renderizarMochila1();
+                                                                                inInEscolha = scanner.nextInt();
+                                                                                if(criarIntervalo(1,mochila.consultarArmas().size()).contains(inInEscolha)){
+                                                                                    mochila.removerItem(null,null,null);
+                                                                                    break;
+                                                                                }else{
+                                                                                    System.out.print("Escolha um número válido");
+                                                                                    continue;
+                                                                                }
+                                                                            }
+                                                                        case 2:
+                                                                            while(true){
+                                                                                renderizarMochila2();
+                                                                                inInEscolha = scanner.nextInt();
+                                                                                if(criarIntervalo(1,mochila.consultarArtefatos().size()).contains(inInEscolha)){
+
+                                                                                    Artefato ArtefatoEscolhido = mochila.findByIndexArtefato(inInEscolha);
+
+                                                                                    mochila.removerItem(null,ArtefatoEscolhido,null);
+                                                                                    break;
+                                                                                }else{
+                                                                                    System.out.print("Escolha um número válido");
+                                                                                    continue;
+                                                                                }
+                                                                            }
+                                                                        case 3:
+                                                                            while(true){
+                                                                                renderizarMochila3();
+                                                                                inInEscolha = scanner.nextInt();
+                                                                                if(criarIntervalo(1,mochila.consultarPocoes().size()).contains(inInEscolha)){
+                                                                                    mochila.removerItem(null,null,null);
+                                                                                    break;
+                                                                                }else{
+                                                                                    System.out.print("Escolha um número válido");
+                                                                                    continue;
+                                                                                }
+                                                                            }
+                                                                    }
+                                                                    break;
+                                                                }else{
+                                                                    System.out.print("Escolha um número válido");
+                                                                    continue;
+                                                                }
+                                                            }
+                                                            continue;
+                                                        case 2:
+                                                            // 2 - Associar Artefato
+                                                        case 3:
+                                                            // 3 - Remover Artefato
+                                                        case 4:
+                                                            // 4 - Usar Poção
+                                                        case 5:
+                                                            // 5 - Próxima rodada
+                                                        case 6:
+                                                            System.out.println("\n\nObrigado por jogar!\n\n");
+                                                            break;
+                                                    }
+                                                }else{
+
+                                                }
+                                            }
+                                        }
+
+                                    }
+
+                                }else{
+
+                                    System.out.print("Escolha um número válido");
+                                    continue;
+                                }
+
+                            }
+
+                            if(!resultadoVenceu){
+                                break;
+                            }else{
+                                continue;
+                            }
 
                         case 5:
                             System.out.println("\n\nObrigado por jogar!\n\n");
@@ -202,9 +317,9 @@ public class Main{
         "1 - Editar Mochila\n"+
         "2 - Associar Artefato\n"+
         "3 - Remover Artefato\n"+
-        "3 - Usar Poção\n"+
-        "4 - Próxima rodada\n"+
-        "5 - Sair\n\n"+
+        "4 - Usar Poção\n"+
+        "5 - Próxima rodada\n"+
+        "6 - Sair\n\n"+
         "# Escolha uma opção acima\n\n";
     }
 

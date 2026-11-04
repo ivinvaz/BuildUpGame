@@ -86,7 +86,7 @@ public class Main{
             if(criarIntervalo(1,2).contains(inEscolha)){
                 Arma novaArma = usuario.criarArma(inEscolha == 1 ? "magico" : "fisico");
                 mochila.addItem(novaArma,null,null);
-                System.out.println("> Parabéns!!! Você recebeu: " + novaArma.getNome() + ", que possui " + novaArma.getDano() + " de dano\n");
+                System.out.println("> Parabéns!!! Você recebeu: " + novaArma.getNome() + ", que possui " + novaArma.getDano(mochila) + " de dano\n");
                 return;
             }else{
                 System.out.println("Escolha um número válido");
@@ -561,7 +561,7 @@ public class Main{
         String resultado = "";
         ArrayList<Pocao> pocoes = mochila.consultarPocoes();
         for(int i = 0; i < pocoes.size(); i++){
-            resultado += (i + 1) + ". " + pocoes.get(i).getNome() + " [cura " + pocoes.get(i).getCura() + "]\n";
+            resultado += (i + 1) + ". " + "Poção de cura" + " [cura " + pocoes.get(i).getCura() + "]\n";
         }
         return resultado;
     }
@@ -570,7 +570,7 @@ public class Main{
         String resultado = "";
         for(int i = 0; i < armas.size(); i++){
             Arma arma = armas.get(i);
-            resultado += (i + 1) + ". " + arma.getNome() + " [" + arma.getCategoria() + ", dano " + arma.getDano() + "]";
+            resultado += (i + 1) + ". " + arma.getNome() + " [" + arma.getCategoria() + ", dano " + arma.getDano(mochila) + "]";
             if(associados.containsKey(arma)){
                 resultado += " + " + associados.get(arma).getNome();
             }

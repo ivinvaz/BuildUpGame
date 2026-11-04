@@ -75,7 +75,11 @@ public class Usuario{
     }
 
     public void assimilarArtefato(Artefato artefato, Arma arma){
-        arma.assimilarArtefato(artefato,this.mochila);
+        mochila.associarArtefato(arma,artefato);
+    }
+
+    public int getVidaMaxima(){
+        return this.vidaMaxima;
     }
 
     public Mochila getUsuarioMochila(){

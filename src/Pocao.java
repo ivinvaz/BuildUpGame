@@ -19,4 +19,6 @@ public class Pocao{
     public int getCura(){
         return this.cura;
     }
+
+    
 }

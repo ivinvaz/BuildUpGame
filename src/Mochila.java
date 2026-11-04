@@ -87,7 +87,7 @@ public class Mochila{
     
         for (Arma arma : armas) {
             String categoriaArma = arma.getCategoria();
-            int danoArma = arma.getDano();
+            int danoArma = arma.getDano(this);
         
             if (categoriaInimigo.equals("normal") && categoriaArma.equals("fisico")) {
                 dano += danoArma / 2;
@@ -111,6 +111,6 @@ public class Mochila{
     }
 
     public Artefato findByIndexArtefato(int index){
-        return this.artefatos[index];
+        return this.artefatos.get(index);
     }
 }

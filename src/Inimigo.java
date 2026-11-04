@@ -57,17 +57,10 @@ public class Inimigo{
         return this.vida;
     }
     
-    @Override
     public String getNome(){
         return this.nome;
     }
 
-    @Override
-    public int getPeso(){
-        return this.peso;
-    }
-
-    @Override
     public String getCategoria(){
         return this.categoria;
     }

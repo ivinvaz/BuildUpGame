@@ -35,7 +35,18 @@ public class Artefato implements ItemInterface{
         return this.aumento;
     }
 
+    @Override
     public String getNome(){
         return this.nome;
+    }
+
+    @Override
+    public int getPeso(){
+        return this.peso;
+    }
+
+    @Override
+    public String getCategoria(){
+        return this.categoria;
     }
 }

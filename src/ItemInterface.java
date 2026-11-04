@@ -1,7 +1,7 @@
 package src;
 
-public abstract class ItemInterface{
-    protected String nome;
-    protected String categoria;
-    protected int peso;
+public interface ItemInterface {
+    String getNome();
+    String getCategoria();
+    int getPeso();
 }

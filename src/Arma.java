@@ -1,6 +1,7 @@
 package src;
 
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.HashMap;
 
 public class Arma implements ItemInterface{
 
@@ -31,7 +32,7 @@ public class Arma implements ItemInterface{
         this.nome = NOMES[ThreadLocalRandom.current().nextInt(0, NOMES.length)];
         this.categoria = categoria;
         this.dano = categoria.equals("fisico") ? ThreadLocalRandom.current().nextInt(18, 25) : ThreadLocalRandom.current().nextInt(9, 13);
-        this.peso = categoria.equals("fisico") 2 : 1;
+        this.peso = categoria.equals("fisico") ? 2 : 1;
     }
 
     public void editarParams(String nome, String categoria, Integer dano, Integer peso){
@@ -41,22 +42,24 @@ public class Arma implements ItemInterface{
         this.peso = (peso != null) ? peso : this.peso;
     }
 
+    @Override
     public String getNome(){
         return this.nome;
     }
 
+    @Override
     public String getCategoria(){
         return this.categoria;
     }
 
     public int getDano(Mochila mochila){
-        int dano = 0;
-        if(temArtefato){
-            Artefato artefato = mochila.getArtefato(artefato);
-            dano += artefato.getAumento();
-        }
-        dano += this.dano;
-        return dano;
+        Artefato artefato = mochila.consultarAssociados().get(this);
+        return this.dano + (artefato != null ? artefato.getAumento() : 0);
+    }
+
+    @Override
+    public int getPeso(){
+        return this.peso;
     }
 
 }

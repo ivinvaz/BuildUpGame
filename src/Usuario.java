@@ -93,4 +93,8 @@ public class Usuario{
     public void useMoedas(int moedas){
         this.moedas --;
     }
+
+    public void curar(int cura){
+        this.vida += (this.vida / 100 * cura);
+    }
 }

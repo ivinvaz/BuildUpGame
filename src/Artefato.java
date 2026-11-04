@@ -34,4 +34,8 @@ public class Artefato implements ItemInterface{
     public int getAumento(){
         return this.aumento;
     }
+
+    public String getNome(){
+        return this.nome;
+    }
 }

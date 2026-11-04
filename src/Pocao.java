@@ -15,4 +15,8 @@ public class Pocao{
         this.cura = ThreadLocalRandom.current().nextInt(25,36);
         this.peso = 1;
     }
+
+    public int getCura(){
+        return this.cura;
+    }
 }

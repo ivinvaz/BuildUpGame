@@ -19,7 +19,7 @@ Antes de iniciar uma batalha, o jogador pode:
 - **Comprar poções:** gastar moedas para adquirir poções de cura, respeitando o espaço disponível.
 - **Acompanhar os atributos:** visualizar a vida, o espaço ocupado na mochila e a quantidade de moedas.
 
-A mochila possui um limite de **6 espaços**. Armas físicas ocupam mais espaço que armas mágicas, então é importante planejar os equipamentos que serão levados.
+A mochila possui um limite de **5 espaços**. Armas físicas ocupam mais espaço que armas mágicas, então é importante planejar os equipamentos que serão levados.
 
 ### Batalhas e etapas
 

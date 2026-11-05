@@ -113,4 +113,8 @@ public class Mochila{
     public Artefato findByIndexArtefato(int index){
         return this.artefatos.get(index);
     }
+
+    public void adicionarEspaco(){
+        this.espacoUsado ++;
+    }
 }

@@ -16,6 +16,8 @@ public class Main{
     static Usuario usuario;
     static Mochila mochila;
     static int etapa = 1;
+    static final int limiteNaMochila = 5;
+    static HashMap<Integer,Inimigo> inimigosPorEtapa = new HashMap<>();
 
     public static void main(String[] args){
 
@@ -68,7 +70,7 @@ public class Main{
 
     public static void adicionarArma(){
         while(true){
-            if(mochila.consultarEspacoUsado() >= 6){
+            if(mochila.consultarEspacoUsado() >= limiteNaMochila){
                 System.out.println("Você não possui mais espaço na mochila");
                 return;
             }
@@ -78,7 +80,7 @@ public class Main{
             System.out.println("# Escolha um tipo de arma para adicionar:");
             int inEscolha = lerInt();
 
-            if(inEscolha == 2 && mochila.consultarEspacoUsado() >= 5){
+            if(inEscolha == 2 && mochila.consultarEspacoUsado() >= limiteNaMochila - 1){
                 System.out.println("Você não possui mais espaço na mochila");
                 return;
             }
@@ -95,7 +97,7 @@ public class Main{
     }
 
     public static void comprarPocao(){
-        if(mochila.consultarEspacoUsado() >= 6){
+        if(mochila.consultarEspacoUsado() >= limiteNaMochila){
             System.out.println("\n\nVocê não possui mais espaço na mochila \n\n");
             return;
         }
@@ -117,11 +119,11 @@ public class Main{
 
         while(true){
 
-            Inimigo inimigo = new Inimigo(etapa);
+            inimigosPorEtapa.computeIfAbsent(etapa, Inimigo::new);
             int continuar;
 
             while(true){
-                System.out.println("\nVocê está prestes a enfrentar o inimigo " + inimigo.getNome() + " que possui " + inimigo.getVida() + " de vida, " + inimigo.getDano() + " de dano, e categoria " + inimigo.getCategoria());
+                System.out.println("\nVocê está prestes a enfrentar o inimigo " + inimigosPorEtapa.get(etapa).getNome() + " que possui " + inimigosPorEtapa.get(etapa).getVida() + " de vida, " + inimigosPorEtapa.get(etapa).getDano() + " de dano, e categoria " + inimigosPorEtapa.get(etapa).getCategoria());
                 System.out.println("\n Você deseja continuar: \n 1. Sim \n 2. Não");
                 continuar = lerInt();
                 if(criarIntervalo(1,2).contains(continuar)){
@@ -134,7 +136,7 @@ public class Main{
                 return;
             }
 
-            HashMap<String, Object> resultado = usuario.batalhar(inimigo);
+            HashMap<String, Object> resultado = usuario.batalhar(inimigosPorEtapa.get(etapa));
             boolean resultadoVenceu = (boolean) resultado.get("venceu");
             String resultadoMensagem = (String) resultado.get("mensagem");
 
@@ -245,6 +247,7 @@ public class Main{
             if(criarIntervalo(1,armas.size()).contains(inInEscolha)){
                 Arma armaEscolhida = armas.get(inInEscolha - 1);
                 mochila.removerItem(armaEscolhida,null,null);
+                mochila.adicionarEspaco();
                 System.out.println("\n\n> " + armaEscolhida.getNome() + " foi removida da mochila\n\n");
                 return;
             }else{
@@ -297,6 +300,7 @@ public class Main{
             if(criarIntervalo(1,pocoes.size()).contains(inInEscolha)){
                 Pocao pocaoEscolhida = pocoes.get(inInEscolha - 1);
                 mochila.removerItem(null,null,pocaoEscolhida);
+                mochila.adicionarEspaco();
                 System.out.println("\n\n> A poção foi removida da mochila\n\n");
                 return;
             }else{

@@ -15,9 +15,9 @@ public class Usuario{
 
     public Usuario(String nome){
         this.nome = nome;
-        this.vida = ThreadLocalRandom.current().nextInt(90,101);
-        this.vidaMaxima = 100;
-        this.moedas = ThreadLocalRandom.current().nextInt(2,5);
+        this.vida = ThreadLocalRandom.current().nextInt(40,51);
+        this.vidaMaxima = 50;
+        this.moedas = ThreadLocalRandom.current().nextInt(1,3);
         this.mochila = new Mochila();
         this.possuiArtefato = false;
     }
@@ -99,6 +99,9 @@ public class Usuario{
     }
 
     public void curar(int cura){
-        this.vida += (this.vida / 100 * cura);
+        this.vida += (this.vidaMaxima / 100 * cura);
+        if (this.vida > this.vidaMaxima) {
+            this.vida = this.vidaMaxima;
+        }
     }
 }

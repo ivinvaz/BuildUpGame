@@ -1,7 +1,6 @@
 package src;
 
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.HashMap;
 
 public class Arma implements ItemInterface{
 
@@ -33,13 +32,6 @@ public class Arma implements ItemInterface{
         this.categoria = categoria;
         this.dano = categoria.equals("fisico") ? ThreadLocalRandom.current().nextInt(18, 25) : ThreadLocalRandom.current().nextInt(9, 13);
         this.peso = categoria.equals("fisico") ? 2 : 1;
-    }
-
-    public void editarParams(String nome, String categoria, Integer dano, Integer peso){
-        this.nome = (nome != null) ? nome : this.nome;
-        this.categoria = (categoria != null) ? categoria : this.categoria;
-        this.dano = (dano != null) ? dano : this.dano;
-        this.peso = (peso != null) ? peso : this.peso;
     }
 
     @Override

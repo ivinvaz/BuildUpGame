@@ -10,8 +10,6 @@ public class Usuario{
     protected int vidaMaxima;
     protected int moedas;
     protected Mochila mochila;
-    protected boolean possuiArtefato;
-    protected int artefato;
 
     public Usuario(String nome){
         this.nome = nome;
@@ -19,15 +17,10 @@ public class Usuario{
         this.vidaMaxima = 50;
         this.moedas = ThreadLocalRandom.current().nextInt(1,3);
         this.mochila = new Mochila();
-        this.possuiArtefato = false;
     }
 
     public Arma criarArma(String categoria){
         return new Arma(categoria);
-    }
-
-    public void editarArma(Arma arma, String nome, String categoria,Integer dano, Integer peso) {
-        arma.editarParams(nome, categoria, dano, peso);
     }
 
     public HashMap<String, Object> batalhar(Inimigo inimigo){
@@ -74,10 +67,6 @@ public class Usuario{
 
     }
 
-    public void assimilarArtefato(Artefato artefato, Arma arma){
-        mochila.associarArtefato(arma,artefato);
-    }
-
     public int getVidaMaxima(){
         return this.vidaMaxima;
     }
@@ -99,7 +88,7 @@ public class Usuario{
     }
 
     public void curar(int cura){
-        this.vida += (this.vidaMaxima / 100 * cura);
+        this.vida += this.vidaMaxima * cura / 100;
         if (this.vida > this.vidaMaxima) {
             this.vida = this.vidaMaxima;
         }

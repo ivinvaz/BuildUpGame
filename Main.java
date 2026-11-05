@@ -63,6 +63,7 @@ public class Main{
     }
 
     public static void novoJogo(){
+        inimigosPorEtapa.clear();
         usuario = new Usuario(nome);
         mochila = usuario.getUsuarioMochila();
         etapa = 1;
@@ -80,13 +81,14 @@ public class Main{
             System.out.println("# Escolha um tipo de arma para adicionar:");
             int inEscolha = lerInt();
 
-            if(inEscolha == 2 && mochila.consultarEspacoUsado() >= limiteNaMochila - 1){
-                System.out.println("Você não possui mais espaço na mochila");
-                return;
-            }
-
             if(criarIntervalo(1,2).contains(inEscolha)){
                 Arma novaArma = usuario.criarArma(inEscolha == 1 ? "magico" : "fisico");
+
+                if(mochila.consultarEspacoUsado() + novaArma.getPeso() > limiteNaMochila){
+                    System.out.println("Você não possui mais espaço na mochila");
+                    return;
+                }  
+                   
                 mochila.addItem(novaArma,null,null);
                 System.out.println("> Parabéns!!! Você recebeu: " + novaArma.getNome() + ", que possui " + novaArma.getDano(mochila) + " de dano\n");
                 return;
@@ -97,7 +99,8 @@ public class Main{
     }
 
     public static void comprarPocao(){
-        if(mochila.consultarEspacoUsado() >= limiteNaMochila){
+        Pocao novaPocao = new Pocao();
+        if(mochila.consultarEspacoUsado() + nova.getPeso() > limiteNaMochila){
             System.out.println("\n\nVocê não possui mais espaço na mochila \n\n");
             return;
         }
@@ -106,7 +109,7 @@ public class Main{
             return;
         }
         usuario.useMoedas(1);
-        mochila.addItem(null,null,new Pocao());
+        mochila.addItem(null,null,novaPocao);
         System.out.println("\n\n> Uma poção foi adicionada na sua mochila!\n\n");
     }
 
@@ -247,7 +250,6 @@ public class Main{
             if(criarIntervalo(1,armas.size()).contains(inInEscolha)){
                 Arma armaEscolhida = armas.get(inInEscolha - 1);
                 mochila.removerItem(armaEscolhida,null,null);
-                mochila.adicionarEspaco();
                 System.out.println("\n\n> " + armaEscolhida.getNome() + " foi removida da mochila\n\n");
                 return;
             }else{
@@ -300,7 +302,6 @@ public class Main{
             if(criarIntervalo(1,pocoes.size()).contains(inInEscolha)){
                 Pocao pocaoEscolhida = pocoes.get(inInEscolha - 1);
                 mochila.removerItem(null,null,pocaoEscolhida);
-                mochila.adicionarEspaco();
                 System.out.println("\n\n> A poção foi removida da mochila\n\n");
                 return;
             }else{
@@ -416,19 +417,12 @@ public class Main{
 
     public static String renderizarMenuInicial(int vida, int espaco, int moedas){
         return "==========Menu Inicial==========\n"+
-        "Vida: "+vida+"/100"+"     "+"Espaços na mochila: "+espaco+"/6"+"     "+"Moedas: "+moedas+"\n\n"+
+        "Vida: "+vida+"/50"+"     "+"Espaços na mochila: "+espaco+"/5"+"     "+"Moedas: "+moedas+"\n\n"+
         "1 - Adicionar arma (Adiciona uma arma à sua mochila)\n"+
         "2 - Editar Mochila\n"+
         "3 - Comprar Poção\n"+
         "4 - Iniciar Jogo\n"+
         "5 - Sair\n\n"+
-        "# Escolha uma opção acima\n\n";
-    }
-
-    public static String renderizarMenuInicial1(){
-        return "==========Adicionar Arma==========\n\n"+
-        "1 - Adicionar arma mágica (dão mais dano a inimigos físico)\n"+
-        "2 - Adicionar arma física (dão mais dano a inimigos mágicos)\n\n"+
         "# Escolha uma opção acima\n\n";
     }
 
@@ -462,7 +456,7 @@ public class Main{
 
     public static String renderizarMenuEtapa(int vida, int espaco, int moedas){
         return "==========Menu Etapa==========\n"+
-        "Vida: "+vida+"/100"+"     "+"Espaços na mochila: "+espaco+"/6"+"     "+"Moedas: "+moedas+"\n\n"+
+        "Vida: "+vida+"/50"+"     "+"Espaços na mochila: "+espaco+"/5"+"     "+"Moedas: "+moedas+"\n\n"+
         "1 - Editar Mochila\n"+
         "2 - Associar Artefato\n"+
         "3 - Remover Artefato\n"+

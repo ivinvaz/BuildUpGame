@@ -54,14 +54,14 @@ public class Mochila{
 
     public void addItem(Arma arma, Artefato artefato, Pocao pocao){
         if(arma != null){
-            this.espacoUsado += arma.getCategoria().contains("magico") ? 1 : 2;
+            this.espacoUsado += arma.getPeso();
             armas.add(arma);
         }
         if(artefato != null){
             artefatos.add(artefato);
         }
         if(pocao != null){
-            this.espacoUsado ++;
+            this.espacoUsado += pocao.getPeso();
             pocoes.add(pocao);
         }
 
@@ -71,14 +71,18 @@ public class Mochila{
         if(arma != null){
             int posicao = getPosItem(arma,null,null);
             armas.remove(posicao);
+            associados.remove(arma);
+            this.espacoUsado -= arma.getPeso();
         }
         if(artefato != null){
             int posicao = getPosItem(null,artefato,null);
             artefatos.remove(posicao);
+            associados.entrySet().removeIf(entry -> entry.getValue().equals(artefato));
         }
         if(pocao != null){
             int posicao = getPosItem(null,null,pocao);
             pocoes.remove(posicao);
+            this.espacoUsado -= pocao.getPeso();
         }
     }
 
@@ -114,7 +118,4 @@ public class Mochila{
         return this.artefatos.get(index);
     }
 
-    public void adicionarEspaco(){
-        this.espacoUsado ++;
-    }
 }

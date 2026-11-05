@@ -100,7 +100,7 @@ public class Main{
 
     public static void comprarPocao(){
         Pocao novaPocao = new Pocao();
-        if(mochila.consultarEspacoUsado() + nova.getPeso() > limiteNaMochila){
+        if(mochila.consultarEspacoUsado() + novaPocao.getPeso() > limiteNaMochila){
             System.out.println("\n\nVocê não possui mais espaço na mochila \n\n");
             return;
         }

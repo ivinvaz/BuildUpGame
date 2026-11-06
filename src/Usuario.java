@@ -13,7 +13,7 @@ public class Usuario{
 
     public Usuario(String nome){
         this.nome = nome;
-        this.vida = ThreadLocalRandom.current().nextInt(40,51);
+        this.vida = ThreadLocalRandom.current().nextInt(20,31);
         this.vidaMaxima = 50;
         this.moedas = ThreadLocalRandom.current().nextInt(1,3);
         this.mochila = new Mochila();

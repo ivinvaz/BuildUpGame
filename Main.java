@@ -417,7 +417,7 @@ public class Main{
 
     public static String renderizarMenuInicial(int vida, int espaco, int moedas){
         return "==========Menu Inicial==========\n"+
-        "Vida: "+vida+"/50"+"     "+"Espaços na mochila: "+espaco+"/5"+"     "+"Moedas: "+moedas+"\n\n"+
+        "Vida: "+vida+"/30"+"     "+"Espaços na mochila: "+espaco+"/5"+"     "+"Moedas: "+moedas+"\n\n"+
         "1 - Adicionar arma (Adiciona uma arma à sua mochila)\n"+
         "2 - Editar Mochila\n"+
         "3 - Comprar Poção\n"+
@@ -456,7 +456,7 @@ public class Main{
 
     public static String renderizarMenuEtapa(int vida, int espaco, int moedas){
         return "==========Menu Etapa==========\n"+
-        "Vida: "+vida+"/50"+"     "+"Espaços na mochila: "+espaco+"/5"+"     "+"Moedas: "+moedas+"\n\n"+
+        "Vida: "+vida+"/30"+"     "+"Espaços na mochila: "+espaco+"/5"+"     "+"Moedas: "+moedas+"\n\n"+
         "1 - Editar Mochila\n"+
         "2 - Associar Artefato\n"+
         "3 - Remover Artefato\n"+
